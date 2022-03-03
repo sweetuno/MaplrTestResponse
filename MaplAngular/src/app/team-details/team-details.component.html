@@ -1,0 +1,72 @@
+<!-- Header principal de la Page -->
+
+<div class="jumbtron py-3">
+    <h1 class="display-4 text-center">Team Detail</h1>
+</div>
+
+<!-- Premier pannel de sélection de l'année  -->
+<div class="container text-center">
+    <div class="row text-center">
+        <form novalidate #form="ngForm" (submit)="onLoad(service.formData.year)" class="text-center">
+            <div class="text-center">
+                <label>Quelle est l'année de l'équipe que vous souhaitez étudier ? </label>
+                <input class="form-control form-control-lg" placeholder="Year"
+                    name="year" #year="ngModel" [(ngModel)]="service.formData.year">
+            </div>
+            <br>
+            <div class="text-center">
+                <button class="btn btn-info btn-lg btn-block" type="submit">Find</button>
+            </div>
+            <br>
+        </form>
+    </div>
+</div>
+
+<!-- Affichage formulaire de création d'un nouveau Joueur -->
+
+<div class="row" *ngFor="let td of service.list">
+<div class="col-md-3">
+    <h1 class="display-8 text-center">Add New Player</h1>
+    <app-team-detail-form></app-team-detail-form>
+</div>
+<!-- Affichage du tableau des joueurs de l'équipe -->
+
+<div class="col-md-9 text-center" >
+    <div class="row text-center" >
+        <div class="col-md-6 text-center">
+            <h1 class="display-8 text-center">Team caracteristics</h1>
+            <br>
+            <div class="row text-center"><label>Coach : {{td.coach}}</label></div>
+            <div class="row text-center"><label>Year : {{td.year}}</label></div>
+        </div>
+        <div class="col-md-6 text-center">
+            <h1 class="display-8 text-center">Team members</h1>
+            <br>
+            <table class="table text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Number</th>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Position</th>
+                        <th>Is captain</th>
+                        <th>Set Captain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pd of td.players">
+                        <td>{{pd.number}}</td>
+                        <td>{{pd.name}}</td>
+                        <td>{{pd.lastName}}</td>
+                        <td>{{pd.position}}</td>
+                        <td>{{pd.isCaptain}}</td>
+                        <td>
+                            <i class="fa-regular fa-hand-pointer text-center" (click)="onUpdate(pd,service.formData.year)"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
